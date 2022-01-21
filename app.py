@@ -6,6 +6,10 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 # CORS(app)
 api = Api(app)
 
+@app.route('/', defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder, 'index.html')
+
 parser = reqparse.RequestParser()
 parser.add_argument('word')
 
@@ -22,9 +26,6 @@ class CheckWord(Resource):
             return jsonify(True)
         return jsonify(False) 
 
-@app.route('/', defaults={'path':''})
-def serve(path):
-    return send_from_directory(app.static_folder, 'index.html')
 
 api.add_resource(CheckWord, '/check_word')
 
