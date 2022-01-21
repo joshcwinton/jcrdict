@@ -7,6 +7,7 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 api = Api(app)
 
 @app.route('/', defaults={'path':''})
+@app.route('/index')
 def serve(path):
     return send_from_directory(app.static_folder, 'index.html')
 
@@ -63,4 +64,4 @@ api.add_resource(CheckWord, '/check_word')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=33507, use_reloader=True)
