@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import json
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
@@ -22,6 +22,10 @@ class CheckWord(Resource):
         if (args['word'] in lines):
             return jsonify(True)
         return jsonify(False) 
+
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder, 'index.html')
 
 api.add_resource(CheckWord, '/check_word')
 
