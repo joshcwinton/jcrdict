@@ -14,7 +14,7 @@ class WordForm extends React.Component {
   }
 
   handleSubmit(event) {
-    fetch(`http://jcr-dict.herokuapp.com/check_word?word=${this.state.value}`)
+    fetch(`https://jcr-dict.herokuapp.com/check_word?word=${this.state.value}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
