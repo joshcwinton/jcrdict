@@ -7,7 +7,6 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 api = Api(app)
 
 @app.route('/', defaults={'path':''})
-@app.route('/index/<path:path>')
 def serve(path):
     return send_from_directory(app.static_folder, 'index.html')
 
