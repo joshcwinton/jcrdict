@@ -6,7 +6,6 @@ import WordForm from './components/WordForm'
 function App() {
   return (
     <div className="App">
-      hello
       <WordForm />
     </div>
   );
