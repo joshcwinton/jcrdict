@@ -18,7 +18,7 @@ class WordForm extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if(res == true){
+        if(res === true){
             this.setState({displayText: `${this.state.value} is a valid Jamaican word.`})
         } else {
             this.setState({displayText: `${this.state.value} is not a valid Jamaican word.`})
