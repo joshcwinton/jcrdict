@@ -22,7 +22,7 @@ lines = [line.strip() for line in lines]
 class CheckWord(Resource):
     def get(self):
         args = parser.parse_args()
-        if (args['word'] in lines):
+        if (args['word'].lower() in lines):
             return jsonify(True)
         return jsonify(False) 
 
