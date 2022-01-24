@@ -30,6 +30,7 @@ class WordForm extends React.Component {
   render() {
     return (
       <div>
+        Enter a word and click submit to check whether it's in the Jamaican Creole dictionary.
         <form onSubmit={this.handleSubmit}>
           <label>
             Word:
