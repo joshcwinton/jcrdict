@@ -1,8 +1,8 @@
-// import { render, screen } from '@testing-library/react';
-// import App from './App';
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+test('renders help text', () => {
+  render(<App />);
+  const element = screen.getByText(/Enter a word and click submit to check whether it's in the Jamaican Creole dictionary./i);
+  expect(element).toBeInTheDocument();
+});
