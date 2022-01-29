@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, send_from_directory
+"""Flask backend for JCR Dict web app."""
+from flask import Flask, jsonify, send_from_directory
 from flask_restful import Api, Resource, reqparse
 # from flask_cors import CORS
 
@@ -6,25 +7,30 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 # CORS(app)
 api = Api(app)
 
-@app.route('/', defaults={'path':''})
-def serve(path):
+
+@app.route('/')
+def serve():
+    """Serves root of react app."""
     return send_from_directory(app.static_folder, 'index.html')
 
 parser = reqparse.RequestParser()
 parser.add_argument('word')
 
 lines = []
-with open('JCR_words') as f:
+with open('JCR_words', encoding="utf-8") as f:
     lines = f.readlines()
 
 lines = [line.strip() for line in lines]
 
+
 class CheckWord(Resource):
+    """Flask-restful resource for checking word validity."""
     def get(self):
+        """Checks whether provided word in JCR dictionary."""
         args = parser.parse_args()
-        if (args['word'].lower() in lines):
+        if args['word'].lower() in lines:
             return jsonify(True)
-        return jsonify(False) 
+        return jsonify(False)
 
 
 api.add_resource(CheckWord, '/check_word')
