@@ -10,27 +10,45 @@ class WordForm extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    // update value and delete error message
+    this.setState({ value: event.target.value, errorMessage: "" });
   }
 
   handleSubmit(event) {
+    // if blank, show error
+    if (this.state.value === "") {
+      this.setErrorMessage("Enter a word!");
+      event.preventDefault();
+      return;
+    }
+
+    // if not check owrd in backend
     fetch(`https://www.jcrdict.com/check_word?word=${this.state.value}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if(res === true){
-            this.setState({displayText: `${this.state.value} is a valid Jamaican word.`})
+        if (res === true) {
+          this.setState({
+            displayText: `${this.state.value} is a valid Jamaican word.`,
+          });
         } else {
-            this.setState({displayText: `${this.state.value} is not a valid Jamaican word.`})
+          this.setState({
+            displayText: `${this.state.value} is not a valid Jamaican word.`,
+          });
         }
       });
-    event.preventDefault();
+      event.preventDefault();
   }
+
+  setErrorMessage = (message) => {
+    this.setState({errorMessage: message, displayText: ""});
+  };
 
   render() {
     return (
       <div>
-        Enter a word and click submit to check whether it's in the Jamaican Creole dictionary.
+        Enter a word and click submit to check whether it's in the Jamaican
+        Creole dictionary.
         <form onSubmit={this.handleSubmit}>
           <label>
             Word:
@@ -42,7 +60,12 @@ class WordForm extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.state.displayText}
+        {this.state.displayText && (
+          <p className="displayText"> {this.state.displayText}</p>
+        )}
+        {this.state.errorMessage && (
+          <p className="error"> {this.state.errorMessage} </p>
+        )}
       </div>
     );
   }
