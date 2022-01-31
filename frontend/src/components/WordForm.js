@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "react-bootstrap/Alert"
 
 class WordForm extends React.Component {
   constructor(props) {
@@ -61,10 +62,10 @@ class WordForm extends React.Component {
           <input type="submit" value="Submit" />
         </form>
         {this.state.displayText && (
-          <p className="displayText"> {this.state.displayText}</p>
+          <Alert variant="primary"> {this.state.displayText}</Alert>
         )}
         {this.state.errorMessage && (
-          <p className="error"> {this.state.errorMessage} </p>
+          <Alert variant="danger"> {this.state.errorMessage} </Alert>
         )}
       </div>
     );

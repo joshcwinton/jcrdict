@@ -2,6 +2,7 @@
 // import './App.css';
 import React  from 'react';
 import WordForm from './components/WordForm'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
