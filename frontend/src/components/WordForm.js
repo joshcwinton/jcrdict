@@ -1,10 +1,10 @@
 import React from "react";
-import Alert from "react-bootstrap/Alert"
+import Alert from "react-bootstrap/Alert";
 
 class WordForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: ""};
+    this.state = { value: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,7 +12,11 @@ class WordForm extends React.Component {
 
   handleChange(event) {
     // update value and delete error message
-    this.setState({ value: event.target.value, errorMessage: "", displayText: "" });
+    this.setState({
+      value: event.target.value,
+      errorMessage: "",
+      displayText: "",
+    });
   }
 
   handleSubmit(event) {
@@ -38,11 +42,11 @@ class WordForm extends React.Component {
           });
         }
       });
-      event.preventDefault();
+    event.preventDefault();
   }
 
   setErrorMessage = (message) => {
-    this.setState({errorMessage: message, displayText: ""});
+    this.setState({ errorMessage: message, displayText: "" });
   };
 
   render() {
