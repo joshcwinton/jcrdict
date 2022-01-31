@@ -11,7 +11,7 @@ class WordForm extends React.Component {
 
   handleChange(event) {
     // update value and delete error message
-    this.setState({ value: event.target.value, errorMessage: "" });
+    this.setState({ value: event.target.value, errorMessage: "", displayText: "" });
   }
 
   handleSubmit(event) {
