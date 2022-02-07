@@ -1,4 +1,5 @@
 """Flask backend for JCR Dict web app."""
+import os
 from flask import Flask, jsonify, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from utils import load_dictionary
@@ -10,10 +11,14 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 api = Api(app)
 
 
-@app.route('/')
-def serve():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
     """Serves root of react app."""
-    return send_from_directory(app.static_folder, 'index.html')
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 parser = reqparse.RequestParser()
@@ -65,8 +70,10 @@ class LookupWord(Resource):
         }
         return jsonify(word_data)
 
+
 class Words(Resource):
     """Interface for reading entire dictionary."""
+
     def get(self):
         """Gets dictionary."""
         return jsonify(dictionary)
