@@ -14,11 +14,11 @@ api = Api(app)
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    """Serves root of react app."""
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
-        return send_from_directory(app.static_folder, path)
+    path_dir = os.path.abspath("../build")  # path react build
+    if path != "" and os.path.exists(os.path.join(path_dir, path)):
+        return send_from_directory(os.path.join(path_dir), path)
     else:
-        return send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(os.path.join(path_dir), 'index.html')
 
 
 parser = reqparse.RequestParser()
