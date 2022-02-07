@@ -14,7 +14,7 @@ api = Api(app)
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    path_dir = os.path.abspath("../build")  # path react build
+    path_dir = os.path.abspath("../frontend/build")  # path react build
     if path != "" and os.path.exists(os.path.join(path_dir, path)):
         return send_from_directory(os.path.join(path_dir), path)
     else:
