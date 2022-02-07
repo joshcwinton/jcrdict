@@ -1,24 +1,15 @@
 """Flask backend for JCR Dict web app."""
 import os
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 from flask_restful import Api, Resource, reqparse
 from utils import load_dictionary
 
 # from flask_cors import CORS
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+app = Flask(__name__, static_url_path='/frontend/build',
+            static_folder='../frontend/build')
 # CORS(app)
 api = Api(app)
-
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    path_dir = os.path.abspath("../frontend/build")  # path react build
-    if path != "" and os.path.exists(os.path.join(path_dir, path)):
-        return send_from_directory(os.path.join(path_dir), path)
-    else:
-        return send_from_directory(os.path.join(path_dir), 'index.html')
 
 
 parser = reqparse.RequestParser()
@@ -30,6 +21,16 @@ dictionary = load_dictionary('data/dictionary.csv')
 def lookup_word(word):
     """Get word definition from dictionary file"""
     return dictionary.get(word)
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    path_dir = os.path.abspath("./frontend/build")  # path react build
+    if path != "" and os.path.exists(os.path.join(path_dir, path)):
+        return send_from_directory(os.path.join(path_dir), path)
+    else:
+        return send_from_directory(os.path.join(path_dir), 'index.html')
 
 
 def check_presence(word):
