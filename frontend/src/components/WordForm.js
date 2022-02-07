@@ -1,7 +1,6 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
 import DefinitionTable from "./DefinitionTable";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 class WordForm extends React.Component {
@@ -60,7 +59,16 @@ class WordForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container py-4">
+        <div className="p-5 mb-4 bg-light rounded-3">
+          <div className="container-fluid py-5">
+            <h1 className="display-5 fw-bold">Jamaican Creole Dictionary</h1>
+            <p className="col-md-8 fs-4">
+              Enter a word to check whether it's in the Jamaican Creole
+              dictionary.
+            </p>
+          </div>
+        </div>
         <div className="p-3">
           <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3">
@@ -75,9 +83,6 @@ class WordForm extends React.Component {
               Submit
             </Button>
           </Form>
-          {/* {this.state.displayText && (
-          <Alert variant="primary"> {this.state.displayText}</Alert>
-        )}*/}
           {this.state.errorMessage && (
             <Alert variant="danger"> {this.state.errorMessage} </Alert>
           )}

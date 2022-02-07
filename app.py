@@ -65,7 +65,14 @@ class LookupWord(Resource):
         }
         return jsonify(word_data)
 
+class Words(Resource):
+    """Interface for reading entire dictionary."""
+    def get(self):
+        """Gets dictionary."""
+        return jsonify(dictionary)
 
+
+api.add_resource(Words, '/words')
 api.add_resource(LookupWord, '/lookup_word')
 
 if __name__ == '__main__':
