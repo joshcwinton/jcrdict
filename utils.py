@@ -5,7 +5,7 @@ import csv
 def load_dictionary(dictionary_path):
     """Read dictionary from CSV."""
     result = {}
-    with open(dictionary_path, encoding='utf-8') as file:
+    with open(dictionary_path, encoding='utf-8-sig') as file:
         for line in csv.DictReader(file, fieldnames=('jamaican', 'english')):
             result[line['jamaican']] = line['english']
     return result
