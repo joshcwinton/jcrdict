@@ -35,7 +35,7 @@ class WordForm extends React.Component {
 
     // if not check owrd in backend
     fetch(
-      `${process.env.REACT_APP_API_URL}/lookup_word?word=${this.state.value}`
+      `/api/lookup_word?word=${this.state.value}`
     )
       .then((res) => res.json())
       .then((res) => {

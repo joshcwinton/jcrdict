@@ -8,7 +8,7 @@ class WordList extends Component {
   }
 
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_API_URL}/words`)
+    fetch('/api/words')
       .then((res) => res.json())
       .then(
         (res) => {

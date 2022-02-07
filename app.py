@@ -83,4 +83,4 @@ api.add_resource(Words, '/api/words')
 api.add_resource(LookupWord, '/api/lookup_word')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=33507, use_reloader=True)
+    app.run(host='0.0.0.0', port=5000, use_reloader=True)
