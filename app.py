@@ -38,12 +38,11 @@ def get_nearest_word(input_word):
     """Gets most similar word in word list."""
     min_distance = float('inf')
     min_word = ''
-    for word, _ in dictionary:
+    for word in dictionary:
         if len(word) == len(input_word):
             distance = 0
-            for i in enumerate(word):
-                if word[i] != input_word[i]:
-                    print(word[i], input_word[i], word[i] != input_word[i])
+            for count, value in enumerate(word):
+                if value != input_word[count]:
                     distance += 1
             if distance < min_distance:
                 min_distance = distance
@@ -61,7 +60,7 @@ class LookupWord(Resource):
         word_data = {
             'word': word,
             'present': check_presence(word),
-            'defintion': lookup_word(word),
+            'definition': lookup_word(word),
             'nearest': get_nearest_word(word)
         }
         return jsonify(word_data)

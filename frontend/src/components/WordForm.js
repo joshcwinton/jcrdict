@@ -1,6 +1,9 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
-
+import DefinitionTable from "./DefinitionTable";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 class WordForm extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,10 @@ class WordForm extends React.Component {
       value: event.target.value,
       errorMessage: "",
       displayText: "",
+      definition: "",
+      nearest: "",
+      present: "",
+      showTable: false,
     });
   }
 
@@ -28,19 +35,21 @@ class WordForm extends React.Component {
     }
 
     // if not check owrd in backend
-    fetch(`https://www.jcrdict.com/check_word?word=${this.state.value}`)
+    fetch(
+      `${process.env.REACT_APP_API_URL}/lookup_word?word=${this.state.value}`
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res === true) {
-          this.setState({
-            displayText: `${this.state.value} is a valid Jamaican word.`,
-          });
-        } else {
-          this.setState({
-            displayText: `${this.state.value} is not a valid Jamaican word.`,
-          });
-        }
+        console.log(this.state);
+        this.setState({
+          definition: res.definition,
+          nearest: res.nearest,
+          present: res.present,
+          showTable: true,
+        });
+
+        console.log("State:", this.state);
       });
     event.preventDefault();
   }
@@ -52,25 +61,37 @@ class WordForm extends React.Component {
   render() {
     return (
       <div>
-        Enter a word and click submit to check whether it's in the Jamaican
-        Creole dictionary.
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Word:
-            <input
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        {this.state.displayText && (
+        <div className="p-3">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+                placeholder="Enter a word"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+          {/* {this.state.displayText && (
           <Alert variant="primary"> {this.state.displayText}</Alert>
-        )}
-        {this.state.errorMessage && (
-          <Alert variant="danger"> {this.state.errorMessage} </Alert>
-        )}
+        )}*/}
+          {this.state.errorMessage && (
+            <Alert variant="danger"> {this.state.errorMessage} </Alert>
+          )}
+          <div className="pt-3">
+            {this.state.showTable && (
+              <DefinitionTable
+                word={this.state.value}
+                definition={this.state.definition}
+                nearest={this.state.nearest}
+                present={this.state.present}
+              />
+            )}
+          </div>
+        </div>
       </div>
     );
   }
