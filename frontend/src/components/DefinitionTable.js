@@ -6,7 +6,7 @@ class DefinitionTable extends Component {
     return (
       <div>
         <h1>Result</h1>
-        <Table striped bordered hover>
+        <Table striped bordered>
           <tbody>
             <tr>
               <td>
@@ -26,12 +26,16 @@ class DefinitionTable extends Component {
               </td>
               <td>{this.props.definition || <i>Not defined</i>}</td>
             </tr>
-            {/* <tr>
-              <td>
-                <b>Nearest</b>
-              </td>
-              <td>{this.props.nearest}</td>
-            </tr> */}
+            {this.props.nearest !== this.props.word ? (
+              <tr>
+                <td>
+                  <b>Nearest</b>
+                </td>
+                <td>{this.props.nearest}</td>
+              </tr>
+            ) : (
+              ""
+            )}
           </tbody>
         </Table>
       </div>
