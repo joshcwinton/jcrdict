@@ -15,8 +15,8 @@ I used a Python script to parse the text on [bible.com]() and compiled a list of
 - Python
 - Node
 ### Install 
-- Clone this repo
 ```
+$ git clone git@github.com:joshcwinton/jcrdict.git
 $ pip install -r requirements.txt
 $ cd frontend
 $ npm i 
