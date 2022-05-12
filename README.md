@@ -10,6 +10,22 @@ I used a Python script to parse the text on [bible.com]() and compiled a list of
 - Frontend: React
 - Backend : Flask
 
+## Install and Run
+### Prequisites
+- Python
+- Node
+### Install 
+- Clone this repo
+```
+$ pip install -r requirements.txt
+$ cd frontend
+$ npm i 
+```
+### Run
+```
+$ flask run
+$ npm run start
+```
 ## Functionality
 ### Word Lookup
 Users can enter a word and see whether it's in the dictionary and, if it's been defined, the English definition:
